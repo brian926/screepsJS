@@ -28,7 +28,7 @@ module.exports.loop = function() {
         Game.spawns.Spawn1.spawnCreep([WORK, WORK, CARRY, MOVE], name, { memory: { role: 'harvester', working: false } });
         console.log("Spawning new harvester creep: " + name);
     }
-    else if (Game.spawns.Spawn1.store.getUsedCapacity(RESOURCE_ENERGY) >= 250){
+    else if (numberOfHarvesters > minimumNumberOfHarvesters && Game.spawns.Spawn1.store.getUsedCapacity(RESOURCE_ENERGY) >= 250){
         Game.spawns.Spawn1.spawnCreep([WORK, CARRY, MOVE, MOVE], name, { memory: { role: 'upgrader', "working": false } });
         console.log("Spawning new upgrader creep: " + name);
     }
