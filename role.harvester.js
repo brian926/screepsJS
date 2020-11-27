@@ -8,14 +8,21 @@ module.exports = {
         }
 
         if (creep.memory.working == true){
-            if (creep.transfer(Game.spawns.Spawn1, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(Game.spawns.Spawn1);
+            if (Game.spawns.Spawn1.store.getFreeCapacity > 0) {
+                if (creep.transfer(Game.spawns.Spawn1, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(Game.spawns.Spawn1, {visualizePathStyle: {stroke: '#ffffff'}});
+                }
+            }
+            else {
+                if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
+                }
             }
         }
         else {
             var source = creep.pos.findClosestByPath(FIND_SOURCES);
             if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source)
+                creep.moveTo(source, {visualizePathStyle: {stroke: '#ffffff'}})
             }
         }
     }
