@@ -8,7 +8,7 @@ module.exports = {
         }
 
         if (creep.memory.working == true){
-            if (Game.spawns.Spawn1.store.getFreeCapacity > 0) {
+            if (Game.spawns.Spawn1.store.getUsedCapacity < 200) {
                 if (creep.transfer(Game.spawns.Spawn1, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(Game.spawns.Spawn1, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
