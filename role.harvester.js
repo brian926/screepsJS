@@ -1,14 +1,14 @@
 module.exports = {
     run: function(creep) {
-        if (creep.memory.working == true && creep.store.getUsedCapacity() == 0) {
+        if (creep.memory.working == true && creep.store.getUsedCapacity(RESOURCE_ENERGY) == 0) {
             creep.memory.working = false;
         }
-        else if (creep.memory.working == false && creep.store.getUsedCapacity() == creep.store.getCapacity()) {
+        else if (creep.memory.working == false && creep.store.getUsedCapacity(RESOURCE_ENERGY) == creep.store.getCapacity(RESOURCE_ENERGY)) {
             creep.memory.working = true;
         }
 
         if (creep.memory.working == true){
-            if (Game.spawns.Spawn1.store.getUsedCapacity < 200) {
+            if (Game.spawns.Spawn1.store.getUsedCapacity(RESOURCE_ENERGY) < 300) {
                 if (creep.transfer(Game.spawns.Spawn1, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(Game.spawns.Spawn1, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
