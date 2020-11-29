@@ -10,6 +10,7 @@ module.exports.loop = function() {
         }
     }
 
+    // Run roles
     for (let name in Game.creeps){
         var creep = Game.creeps[name];
 
@@ -24,6 +25,8 @@ module.exports.loop = function() {
         }
     }
 
+
+    // Auto Spawn Creeps
     var minimumNumberOfHarvesters = 10;
     var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester');
 
@@ -37,15 +40,21 @@ module.exports.loop = function() {
 
     if (numberOfHarvesters < minimumNumberOfHarvesters) {
         Game.spawns.Spawn1.spawnCreep([WORK, WORK, CARRY, MOVE], name, { memory: { role: 'harvester', working: false } });
-        console.log("Spawning new harvester creep: " + name);
     }
     else if (numberOfUpgraders < minimumNumberOfUpgraders){
         Game.spawns.Spawn1.spawnCreep([WORK, CARRY, MOVE, MOVE], name, { memory: { role: 'upgrader', "working": false } });
-        console.log("Spawning new upgrader creep: " + name);
     }
     else if (Game.spawns.Spawn1.store.getUsedCapacity(RESOURCE_ENERGY) >= 250){
-        Game.spawns.Spawn1.spawnCreep([WORK, CARRY, MOVE, MOVE], name, { memory: { role: 'builder', "working": false } });
-        console.log("Spawning new builder creep: " + name);
+        Game.spawns.Spawn1.spawnCreep([WORK, CARRY, MOVE, MOVE], name, { memory: { role: 'builder', "working": false } });       
     }
+
+    /* Build roads
+    var sources = Game.spawns.Spawn1.room.find(FIND_SOURCES);
+    for (var j = 0; j < sources.length; j++) {
+        var chemin = Game.spawns.Spawn1.pos.findPathTo(sources[j].pos);
+        for (var i = 0; i <chemin.length; i++) {
+            Game.spawns.Spawn1.room.createConstructionSite(chemin[i].x,chemin[i].y, STRUCTURE_ROAD);
+        }
+    }*/
 };
 
